@@ -2,6 +2,8 @@ import React, { useEffect, useState } from 'react'
 
 export default function Internship() {
     const [showinternship, setShowInternship] = useState([])
+    const [filterInternship, setFilterInternship] = useState([])
+    const [inputInternship, setInputInternship] = useState("")
   
     const fetchInternship = async () => {
         try {
@@ -17,17 +19,46 @@ export default function Internship() {
         fetchInternship()
     },[])
 
-
+useEffect(() => {
+    const filtered = showinternship.filter((intern)=> 
+    (intern.role_name.toLowerCase().includes(inputInternship)))
+    setFilterInternship(filtered)
+},[inputInternship, showinternship])
+   
   return (
     <div>
-        {showinternship && showinternship.map((i) => (
-            <div key={i.id} className='bg-red-100'>
-               <div>Company name{i.company_name}</div> 
-             <div> Stipend Rs {i.stipend}</div> 
-             <div>Role {i.role_name}</div>
-             <div> duration for {i.duration}</div>
-                </div>
-        ))}
+         <div className='absolute right-72'>
+            <input placeholder='Enter your Location'
+            value={inputInternship}
+            onChange={(e) => setInputInternship(e.target.value)}/>
+        </div>
+        <div className='absolute left-72 '>
+            <input placeholder='Enter your Role name eg:Java Intern , Frontend Intern'
+            value={inputInternship}
+            onChange={(e) => setInputInternship(e.target.value)}/>
+        </div>
+        <div className='absolute right-10 bg-purple-100 p-5 border-radius'>
+            <button>Search</button>
+            </div>
+       {/* width have to make responsive */}
+{filterInternship && filterInternship.map((intern) => (
+    <div key={intern.id} className='flex justify-center'> 
+    <div className='block w-2/6 max-lg:  bg-white border 
+     border-gray-200 rounded-lg shadow-sm hover:bg-slate-300  dark:hover:bg-slate-200'>   
+     <h1 className='text-black font-medium  text-lg'> Company name is {intern.company_name}</h1>
+     <h1 className='text-gray-500'>   Role is {intern.role_name} </h1>
+     
+      <div className='  '>
+        Stipend is  {intern.stipend}<br></br>
+      Duration will be for {intern.duration}
+      </div>
+    
+</div>
+         
+    
+
+    </div>
+))}
     </div>
   )
 }
