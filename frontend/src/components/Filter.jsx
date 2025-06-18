@@ -1,14 +1,16 @@
 import React from 'react';
 import { Bookmark } from 'lucide-react';
 
+
 export default function Filter({ filterInternship }) {
   // Ensure filterInternship is an array before attempting to map
   // If it's not an array, default to an empty array to prevent errors
-  const internshipsToDisplay = Array.isArray(filterInternship) ? filterInternship : [];
+  const internshipsToDisplay = Array.isArray(filterInternship) ? filterInternship : ["Loading"];
 
   return (
     <>
-      {internshipsToDisplay.length === 0 ? "no internship" : 
+  
+      {internshipsToDisplay.length === 0 ? "No internship" : 
         // Map and display internships when available
        internshipsToDisplay.map((intern) => (
           <div key={intern.id} className='flex justify-center'>

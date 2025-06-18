@@ -1,7 +1,11 @@
 import React, { useEffect, useState } from 'react'
+import { useContext } from 'react';
+import ThemeContext from './ThemeContext';
 import SearchInput from './SearchInput';
 import Filter from './Filter';
 import Header from './Header';
+import Checkbox from './Checkbox';
+
 
 export default function Internship() {
     const [showinternship, setShowInternship] = useState([])
@@ -9,6 +13,8 @@ export default function Internship() {
     const [inputInternship, setInputInternship] = useState("")
    const [selectedTypeJob, setSelectedTypeJob] = useState([]);
    const [selectedTypeLocation, setSelectedTypeLocation] = useState([])
+   const {handleTheme} = useContext(ThemeContext)
+  
 
 
  const internshipType = ['Remote', 'Hybrid', 'In-Office', 'Part-Time']
@@ -20,12 +26,11 @@ export default function Internship() {
             const data = await response.json()
             console.log(data)
             setShowInternship(data.data)
-        }   catch (error){
-            console.log("There was an error fetching the data", error)
+        }   catch (error) {
+            console.log("There was no fetching the data", error)
         }
 
     }
-       
     useEffect(() => {
         fetchInternship()
     },[])
@@ -83,14 +88,20 @@ const handleJobLocation = () => {
 
       <SearchInput inputInternship={inputInternship} 
       setInputInternship={setInputInternship}/>
-        
-  <div className='bg-slate-300  h-screen p-5 fixed left-0 top-40 z-40 '>
+    
+  <div className='bg-slate-300  h-screen p-5 absolute left-0 top-40 z-40 '>
         <div>
+        
            <span className='text-black font-semibold mr-32'>Filters</span> 
             <button onClick={handleClear} 
              className=' p-2 rounded-xl text-gray-500'>Clear All</button> 
         </div>
         <div>
+              <div>
+                    {/*   /////////////////////////////////////////////////////////////               */}
+                <button onClick={handleTheme}>Theme toggle</button>
+              </div> 
+             
            <span className='text-black font-semibold mr-32'>Job Type</span> 
             <button onClick={handleJobType} 
             className=' p-2 rounded-xl text-gray-500'>Clear</button> 

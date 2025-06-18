@@ -3,7 +3,7 @@ import React from 'react'
 
 export default function Header() {
   return (
-    <div className='bg-blue-900 fixed w-full z-20 top-0 h-40 '>
+    <div className='bg-blue-900  w-full z-20 top-0 h-40 '>
         <div className=' justify-start p-5 flex-col'>
             <span className='font-bold font-roboto text-white'>TrackApply.</span>
             <span className=' font-roboto text-white ml-10'>Find Internship</span>
