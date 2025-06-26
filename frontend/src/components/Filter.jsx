@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import { Bookmark } from 'lucide-react';
 
 
@@ -6,6 +6,10 @@ export default function Filter({ filterInternship }) {
   // Ensure filterInternship is an array before attempting to map
   // If it's not an array, default to an empty array to prevent errors
   const internshipsToDisplay = Array.isArray(filterInternship) ? filterInternship : ["Loading"];
+
+ 
+  const[bmark, setbmark] = useState(false)
+ 
 
   return (
     <>
@@ -35,7 +39,8 @@ export default function Filter({ filterInternship }) {
                   <p className='text-gray-600 font-semibold'>Job type</p>
                   <p className='text-black font-semibold'>{intern.job_type}</p>
                 </span>
-                <div><Bookmark /></div>
+                <div>
+                  <Bookmark className={bmark ? "bg-pink-300": "bg-red-900"} onClick={() => console.log("idk br")}/> </div>
               </div>
             </div>
           </div>

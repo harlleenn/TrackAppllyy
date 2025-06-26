@@ -75,11 +75,6 @@ const handleJobLocation = () => {
     setFilterInternship(filtered);
         }, 
         [inputInternship, selectedTypeJob, showinternship , selectedTypeLocation]);
- 
-
-  
-
-
    
   return (
 
