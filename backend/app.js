@@ -28,33 +28,4 @@ app.use(express.urlencoded({ extended: false }));
 
 app.use('/api/v1/internship', internshipRoutes);
 
-app.post('/resume', upload.single('resumeImage'), async (req, res) => {
-  try {
-    const filePath = req.file.path;
-    const fileType = req.file.mimetype;
-
-    if (fileType === 'application/pdf') {
-      const pdfBuffer = fs.readFileSync(filePath);
-      const data = await pdfParse(pdfBuffer);
-      console.log("PDF Text:", data.text);
-      res.json({ text: data.text });
-
-    } else if (fileType === 'application/vnd.openxmlformats-officedocument.wordprocessingml.document') {
-      const result = await mammoth.extractRawText({ path: filePath });
-      console.log("DOCX Text:", result.value);
-      res.json({ text: result.value });
-
-    } else {
-      const text = fs.readFileSync(filePath, 'utf8');
-      console.log("Plain Text:", text);
-      res.json({ text });
-    }
-
-  } catch (err) {
-    console.error("Error parsing file:", err);
-    res.status(500).json({ error: 'Failed to read resume file' });
-  }
-});
-
-
 app.listen(Port, () => console.log(`Server is running on port ${Port}`));

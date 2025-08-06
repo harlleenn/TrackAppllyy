@@ -1,56 +1,30 @@
-// FileUpload.js
-import React, { useState } from "react";
-import axios from "axios";
+import { FaBriefcase } from "react-icons/fa";
+import { useContext } from "react";
+import ThemeContext from "./ThemeContext";
 
-function FileUpload() {
-  const [file, setFile] = useState(null);
-  const [message, setMessage] = useState("");
-
-  const handleChange = (e) => {
-    setFile(e.target.files[0]);
-  };
-
-  const handleUpload = async (e) => {
-    e.preventDefault();
-    const formData = new FormData();
-    formData.append("resumeFile", file); // must match backend field
-
-    try {
-      const res = await axios.post("http://localhost:3000/upload", formData, {
-        headers: {
-          "Content-Type": "multipart/form-data",
-        },
-      });
-      setMessage("✅ File uploaded successfully!");
-      console.log(res.data);
-    } catch (err) {
-      setMessage("❌ File upload failed");
-      console.error(err);
-    }
-  };
+function Header() {
+  const { handleTheme } = useContext(ThemeContext);
 
   return (
-    <div>
-        <div className='bg-blue-900  w-full z-20 top-0 h-40 '>
-        <div className=' justify-start p-5 flex-col'>
-            <span className='font-bold font-roboto text-white'>TrackApply.</span>
-            <span className=' font-roboto text-white ml-10'>Find Internship</span>
+    <div className=" w-full z-20 top-0 h-40 fixed shadow-md bg-blue-400">
+      <div className="flex justify-between items-center px-8 py-4">
+        <div className="flex space-x-3">
+          <FaBriefcase className="text-white text-2xl" />
+          <span className="font-bold font-roboto text-white text-xl">TrackApply.</span>
+        </div>
 
-        <form onSubmit={handleUpload}>
-        <input type="file" onChange={handleChange} />
-        <button type="submit">Upload</button>
-        </form>
-      
-           
-        <span  className='  bg-white absolute right-10'>User</span>
+        <div className="flex gap-6">
+          <button onClick={handleTheme} className="bg-white px-4 py-2 rounded">
+            Toggle Theme
+          </button>
         </div>
-        <div className='absolute left-56  '>
-            <span className='font-bold text-4xl text-white'>Find Your Internship</span>
-        </div>
-        
-    </div>
+      </div>
+
+      <div className="absolute left-1/2 transform -translate-x-1/2 top-24 text-center">
+        <h1 className="font-bold text-3xl text-white">Find Your Internship</h1>
+      </div>
     </div>
   );
 }
 
-export default FileUpload;
+export default Header;

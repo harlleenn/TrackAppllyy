@@ -1,10 +1,7 @@
 import React, { useEffect, useState } from 'react'
-import { useContext } from 'react';
-import ThemeContext from './ThemeContext';
 import SearchInput from './SearchInput';
 import Filter from './Filter';
 import Header from './Header';
-import Checkbox from './Checkbox';
 
 
 export default function Internship() {
@@ -13,7 +10,6 @@ export default function Internship() {
     const [inputInternship, setInputInternship] = useState("")
    const [selectedTypeJob, setSelectedTypeJob] = useState([]);
    const [selectedTypeLocation, setSelectedTypeLocation] = useState([])
-   const {handleTheme} = useContext(ThemeContext)
   
 
 
@@ -81,21 +77,16 @@ const handleJobLocation = () => {
     <div>
       <Header/>
 
-      <SearchInput inputInternship={inputInternship} 
+      <SearchInput
+       inputInternship={inputInternship} 
       setInputInternship={setInputInternship}/>
     
-  <div className='bg-slate-300  h-screen p-5 absolute left-0 top-40 z-40 '>
-        <div>
-        
+      <div className='bg-slate-300  h-screen  p-5 fixed left-0 top-40 z-40 '>
            <span className='text-black font-semibold mr-32'>Filters</span> 
             <button onClick={handleClear} 
              className=' p-2 rounded-xl text-gray-500'>Clear All</button> 
-        </div>
         <div>
-              <div>
-                    {/*   /////////////////////////////////////////////////////////////               */}
-                <button onClick={handleTheme}>Theme toggle</button>
-              </div> 
+             
              
            <span className='text-black font-semibold mr-32'>Job Type</span> 
             <button onClick={handleJobType} 
@@ -120,6 +111,7 @@ const handleJobLocation = () => {
             <button onClick={handleJobLocation} 
             className=' p-2 rounded-xl text-gray-500'>Clear</button> 
         </div>
+
         <div className="flex flex-col">
         {/* this is to show the checkbox  */}
         {internshipLocation.map((location) => (
@@ -135,15 +127,8 @@ const handleJobLocation = () => {
         ))}
       </div>
     </div>
-
-       {/* width have to make responsive */}
-       {/* used child component passed props */}
-<Filter filterInternship={filterInternship} /> 
-
-
-  
-
-
+    <Filter 
+    filterInternship={filterInternship} /> 
 </div>
   )
 }
