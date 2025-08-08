@@ -1,28 +1,11 @@
 import React from 'react';
-import { useState } from 'react';
-import ResumeUploadModal from './ResumeUploadModal';
+
 export default function Filter({ filterInternship, onSelectInternship }) {
   const internshipsToDisplay = Array.isArray(filterInternship) ? filterInternship : ["Loading"];
-    const [isResumeModalOpen, setIsResumeModalOpen] = useState(false);
-    const [uploadedResume, setUploadedResume] = useState(null);
-       const handleResumeUpload = (file) => {
-  console.log("Uploaded file:", file);
-  setUploadedResume(file);
-  setIsResumeModalOpen(false);
-};
+
   return (
     <div className='mt-44 ml-8'>
-      <button
-          className="bg-blue-600 text-white px-4 py-2 rounded hover:bg-blue-700"
-          onClick={() => setIsResumeModalOpen(true)}
-        >
-          {uploadedResume ? "Uploaded" : "Upload Resume"}
-        </button>
-          <ResumeUploadModal
-        isOpen={isResumeModalOpen}
-    onClose={() => setIsResumeModalOpen(false)}
-    onFileUpload={handleResumeUpload}
-/>
+      
       {internshipsToDisplay.length === 0 ?  (
       <div className=' right-1/3 top-2/4 absolute'>
         No internships found 
