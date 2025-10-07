@@ -91,80 +91,14 @@
         inputInternship={inputInternship} 
         setInputInternship={setInputInternship}/>
       
-        <div className='bg-slate-300  h-screen  p-5 fixed left-0 top-40 z-40 '>
-            <span className='text-black font-semibold mr-32'>Filters</span> 
-              <button onClick={handleClear} 
-              className=' p-2 rounded-xl text-gray-500'>Clear All</button> 
-          <div>
-              
-              
-            <span className='text-black font-semibold mr-32'>Job Type</span> 
-              <button onClick={handleJobType} 
-              className=' p-2 rounded-xl text-gray-500'>Clear</button> 
-          </div>
-        <div className="flex flex-col ">
-          {/* this is to show the checkbox  */}
-          {internshipType.map((type) => (
-            <label key={type} className="flex items-center gap-2 hover:bg-slate-200 p-2 font-serif">
-              <input
-                type="checkbox"
-                value={type}
-                checked={selectedTypeJob.includes(type)}
-                onChange={() => checkBoxChange(type)}
-              />
-              {type}
-            </label>
-          ))}
-        </div>
-        <div>
-            <span className='text-black font-semibold mr-32'>Location</span> 
-              <button onClick={handleJobLocation} 
-              className=' p-2 rounded-xl text-gray-500'>Clear</button> 
-          </div>
-
-          <div className="flex flex-col">
-          {/* this is to show the checkbox  */}
-          {internshipLocation.map((location) => (
-            <label key={location} className="flex items-center gap-2  hover:bg-slate-200 p-2 font-serif">
-              <input
-                type="checkbox"
-                value={location}
-                checked={selectedTypeLocation.includes(location)}
-                onChange={() => CheckBoxChange(location)}
-              />
-              {location}
-            </label>
-          ))}
-        </div>
-      </div>
-      {isModalOpen && selectedInternship && (
-      <div className="fixed inset-0 bg-black bg-opacity-40 flex items-center justify-center z-50">
-      <div className="bg-white rounded-xl shadow-lg p-6 w-96">
-        <h2 className="text-xl font-bold mb-4">Internship: {selectedInternship.role_name}</h2>
-        <p className="mb-2 text-gray-700">Location: {selectedInternship.location}</p>
-        <p className="mb-4 text-gray-700">Type: {selectedInternship.job_type}</p>
-
-        <div className="flex justify-around mb-4">
-          <button 
-            className="bg-green-500 text-white px-4 py-2 rounded"
-            onClick={() => handleStatusChange('Applied')}
-          >{applied ? "Applied" : "Apply"}</button>
-        </div>
-
-        <button 
-          className="block mx-auto text-gray-600 hover:underline"
-          onClick={() => setIsModalOpen(false)}
-        >Close</button>
-      </div>
-    </div>
-  )}
+   
 
       <Filter 
       filterInternship={filterInternship} 
       onSelectInternship={(intern) => {
       setSelectedInternship(intern);
       setIsModalOpen(true);
-}
+  }
     }/> 
   </div>
     )

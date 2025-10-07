@@ -1,13 +1,12 @@
 import { FaBriefcase } from "react-icons/fa";
-import { useContext } from "react";
-import ThemeContext from "./ThemeContext";
+
 import { useState } from "react";
 import ResumeUploadModal from "./ResumeUploadModal";
 
 
 
 function Header() {
-  const { handleTheme } = useContext(ThemeContext);
+
   const [isResumeModalOpen, setIsResumeModalOpen] = useState(false);
     const [uploadedResume, setUploadedResume] = useState(null);
     const handleResumeUpload = (file) => {
@@ -24,7 +23,6 @@ function Header() {
         </div>
 
         <div className="flex gap-6">
-          <button onClick={handleTheme} className="bg-white px-4 py-2 rounded">Toggle Theme</button>
            <div  className='absolute right-48 '>
               <button className="bg-blue-600 text-white px-4 py-2 rounded hover:bg-blue-700 ml-96"
               onClick={() => setIsResumeModalOpen(true)}>
